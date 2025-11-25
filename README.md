@@ -17,15 +17,17 @@ It includes the core **Entites** needed for managing:
 
 ## Database script 
 
-```
- ## Categories Table
+
+ #### Categories Table
 ```sql
+
 CREATE TABLE Categories (
     category_id INTEGER  PRIMARY KEY,
     category_name VARCHAR(50) NOT NULL
 );
+```
 
-## Products Table
+ #### PRODUCTS Table
 ```sql
 CREATE TABLE PRODUCTS (
     product_id INTEGER PRIMARY KEY,
@@ -37,7 +39,7 @@ CREATE TABLE PRODUCTS (
 
     FOREIGN KEY (category_id)  REFERENCES Categories(category_id) ON DELETE CASCADE
 );
-
+```
 ## Customers Table
 ```sql
 CREATE TABLE CUSTOMERS (
@@ -47,7 +49,7 @@ CREATE TABLE CUSTOMERS (
     email VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL
 );
-
+```
 ## ORDERS Table
 ```sql
 CREATE TABLE ORDERS (
@@ -58,7 +60,7 @@ CREATE TABLE ORDERS (
 
     FOREIGN KEY (customer_id)  REFERENCES CUSTOMERS(cutomer_id) ON DELETE CASCADE
 );
-
+```
 ## ORDER_DETAILS Table
 ```sql
 CREATE TABLE ORDER_DETAILS (
