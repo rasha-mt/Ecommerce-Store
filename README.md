@@ -4,13 +4,16 @@ Design and Analysis Ecommerce Store to help customer search and purchase product
 # 🛒 E-Commerce Database Schema
 
 This project contains a complete SQL database schema for a basic E-Commerce application.  
-It includes the core entities needed for managing:
+It includes the core ## Entites needed for managing:
 
 - Categories  
 - Products  
 - Customers  
 - Orders
-- Order details  
+- Order details
+
+## Relationship between Entites
+![Relationship](ER-Diagrams/relationships.svg)
 
 ## Database script 
 
@@ -70,7 +73,8 @@ CREATE TABLE ORDER_DETAILS (
 );
 ```
 
-
+## ERD Diagram
+![ERD diagram](ER-Diagrams/ecommerce-ERD.svg)
 
 
 
