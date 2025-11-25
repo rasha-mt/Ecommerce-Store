@@ -4,7 +4,7 @@ Design and Analysis Ecommerce Store to help customer search and purchase product
 # 🛒 E-Commerce Database Schema
 
 This project contains a complete PostgreSQL database schema for a basic E-Commerce application.  
-It includes the core Entites needed for managing:
+It includes the core **Entites** needed for managing:
 
 - Categories  
 - Products  
