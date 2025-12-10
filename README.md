@@ -91,7 +91,7 @@ GROUP BY ord.order_date;
 
 **2- SQL query to generate a monthly report of the top-selling products in a given month.**
 ```sql
-select prd.name , SUM(prd.unit_price) as times_sold
+select prd.name , SUM(prd.unit_price * od.quantity) as times_sold
 from order_details od
 JOIN products prd ON prd.product_id = od.product_id
 JOIN orders ord ON ord.order_id = od.order_id 
