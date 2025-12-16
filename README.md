@@ -192,7 +192,7 @@ CREATE TRIGGER SALE_HISTORY_TRIGGER
     FROM inserted i;
     END;
 ```
-**Transaction queries /In the product table**
+## Transaction queries - In the product table
 
 **Write a transaction query to lock the field quantity with product id = 211 from being updated**
 ```sql
