@@ -53,16 +53,6 @@ CREATE TABLE ORDER_DETAILS (
 
 -- Create SaleHistory Table
 
-CREATE TABLE SalesHistory
-(
-    historyID INT IDENTITY PRIMARY KEY,
-    order_id INT,
-    product_id INT,
-    order_date DATETIME,
-    customer_id int,
-    total_amount decimal(7,3),
-    quantity int
-);
 CREATE TABLE  SalesHistory(
 historyID  IDENTITY PRIMARY KEY,
 order_id INT NOT NULL,
