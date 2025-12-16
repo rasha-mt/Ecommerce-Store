@@ -158,15 +158,19 @@ AGAINST ('camera');
 
 1-Create SaleHistory Table
 ```sql 
-CREATE TABLE SalesHistory
-(
-    historyID INT IDENTITY PRIMARY KEY,
-    order_id INT,
-    product_id INT,
-    order_date DATETIME,
-    customer_id int,
-    total_amount decimal(7,3),
-    quantity int
+
+CREATE TABLE  SalesHistory(
+historyID  IDENTITY PRIMARY KEY,
+order_id INT NOT NULL,
+product_id INT NOT NULL,
+Order_Date TIMESTAMP NOT NULL,
+Customer_ID INT NOT NULL,
+total_amount decimal(7,3) NOT NULL CHECK(total_amount > 0),
+quantity INT NOT NULL CHECK(quantity > 0),
+    
+FOREIGN KEY (order_id) REFERENCES orders(order_id),
+FOREIGN KEY (product_id) REFERENCES product(product_id),
+FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
 );
 
 ```
