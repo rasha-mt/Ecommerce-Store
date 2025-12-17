@@ -35,7 +35,7 @@ CREATE TABLE ORDERS (
     order_date timestamp,
     total_amount decimal(7,3) NOT NULL Check(total_amount >= 0),
 
-    FOREIGN KEY (customer_id)  REFERENCES CUSTOMERS(cutomer_id) ON DELETE CASCADE
+    FOREIGN KEY (customer_id)  REFERENCES CUSTOMERS(customer_id) ON DELETE CASCADE
 );
 
 --  ORDER_DETAILS Table
