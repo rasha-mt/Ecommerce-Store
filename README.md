@@ -222,6 +222,12 @@ FOR UPDATE;
 COMMIT;
 ```
 
+## Query Performance Benchmark
+
+|             | No Index | Idx(name) & Idx(state_id) | Idx(name,state_id) |
+|-------------|----------|---------------------------|--------------------|
+|  QPS        |          |                           |                    |
+| Total Times |          |                           |                    |
 
 
 
