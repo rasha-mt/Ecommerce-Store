@@ -223,17 +223,31 @@ COMMIT;
 ```
 
 ## Query Performance Benchmark
+**userinfo Table with 5 Million records**
+**Query**
+```sql
+select count(*) from userinfo where name=? and state_id=?;
+```
 
 |             | No Index | Idx(name) & Idx(state_id) | Idx(name,state_id) |
 |-------------|----------|---------------------------|--------------------|
-|  QPS        |          |                           |                    |
-| Total Times |          |                           |                    |
+|  QPS        |   0.055  |          9.26             |         2880       |
+| Total Times |   18s    |          108ms            |         0.347ms     |
 
+**Q1** 
+```sql 
+select count(*) from userinfo where state_id=?; 
+```
 
-|    QPS      | No Index | Idx(state_id) | Idx(state_id,city,address) | Both Idx |
-|-------------|----------|---------------|----------------------------|----------|
-|     Q1      |          |               |                            |          |
-|     Q2      |          |               |                            |          |
+**Q2** 
+```sql 
+select state_id, city, address from userinfo where state_id=?;
+```
+
+|    QPS      | No Index | Idx(state_id) | Idx(state_id,city,address) | Both Idx  |
+|-------------|----------|---------------|----------------------------|-----------|
+|     Q1      |  9.675s  |  72.683ms     |           109.995 ms       | 100.695ms |
+|     Q2      |  10.012s |   211.18ms    |           185.594ms        | 139.230ms |
 
 
 
