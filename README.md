@@ -249,6 +249,28 @@ select state_id, city, address from userinfo where state_id=?;
 |     Q1      |  9.675s  |  72.683ms     |           109.995 ms       | 100.695ms |
 |     Q2      |  10.012s |   211.18ms    |           185.594ms        | 139.230ms |
 
+***
+***Mentor -6th Tasks***
+## Database Query Optimization ##
+1- Write SQL Query to Retrieve the total number of products in each category
+
+| Simple Query | Execution Time Before Optimization | Optimization Technique | Rewrite Query | Execution Time After Optimization |
+|--------------|----------------------------------|-----------------------|---------------|----------------------------------|
+| `SELECT COUNT(*) AS product_count, p.category_id, c.category_name FROM product p JOIN category c ON c.category_id = p.category_id GROUP BY p.category_id, c.category_name;` | 3.00s | Foreign Key index (category_id) on product and rewrite query | `SELECT p.product_total, c.category_id, c.category_name FROM (SELECT COUNT(*) AS product_total, category_id FROM product GROUP BY category_id) p JOIN category c ON c.category_id = p.category_id;` | 433ms |
+
+
+2- Write SQL Query to Find the top customers by total spending.
+
+| Simple Query | Execution Time Before Optimization | Optimization Technique | Rewrite Query | Execution Time After Optimization |
+|--------------|----------------------------------|-----------------------|---------------|----------------------------------|
+| `SELECT c.first_name ' '  c.last_name AS customer_name FROM customer c JOIN (SELECT customer_id, SUM(total_amount) AS customer_spending FROM orders GROUP BY customer_id ORDER BY customer_spending DESC LIMIT 10) top_customers ON c.customer_id = top_customers.customer_id;` | 8.46s | Materialized view with Index on  calculated materialized value( total_spent )|Non | 196ms |
+
+
+
+
+
+
+
 
 
 
