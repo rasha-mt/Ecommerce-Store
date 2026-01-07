@@ -252,18 +252,44 @@ select state_id, city, address from userinfo where state_id=?;
 ***
 ***Mentor -6th Tasks***
 ## Database Query Optimization ##
-1- Write SQL Query to Retrieve the total number of products in each category
+### 1- Write SQL Query to Retrieve the total number of products in each category
 
 | Simple Query | Execution Time Before Optimization | Optimization Technique | Rewrite Query | Execution Time After Optimization |
 |--------------|----------------------------------|-----------------------|---------------|----------------------------------|
 | `SELECT COUNT(*) AS product_count, p.category_id, c.category_name FROM product p JOIN category c ON c.category_id = p.category_id GROUP BY p.category_id, c.category_name;` | 3.00s | Foreign Key index (category_id) on product and rewrite query | `SELECT p.product_total, c.category_id, c.category_name FROM (SELECT COUNT(*) AS product_total, category_id FROM product GROUP BY category_id) p JOIN category c ON c.category_id = p.category_id;` | 433ms |
 
 
-2- Write SQL Query to Find the top customers by total spending.
+### 2- Write SQL Query to Find the top customers by total spending.
 
 | Simple Query | Execution Time Before Optimization | Optimization Technique | Rewrite Query | Execution Time After Optimization |
 |--------------|----------------------------------|-----------------------|---------------|----------------------------------|
 | `SELECT c.first_name ' '  c.last_name AS customer_name FROM customer c JOIN (SELECT customer_id, SUM(total_amount) AS customer_spending FROM orders GROUP BY customer_id ORDER BY customer_spending DESC LIMIT 10) top_customers ON c.customer_id = top_customers.customer_id;` | 8.46s | Materialized view with Index on  calculated materialized value( total_spent )|Non | 196ms |
+
+### 3-Write SQL Query to Retrieve the most recent orders with customer information with 1000 orders.
+| Simple Query | Execution Time Before Optimization | Optimization Technique | Rewrite Query | Execution Time After Optimization |
+|--------------|----------------------------------|-----------------------|---------------|----------------------------------|
+| `SELECT orders.order_id,customer.* FROM orders JOIN customer ON customer.customer_id = orders.customer_id ORDER BY orders.order_id DESC LIMIT 1000;` | 3.67ms | Foreign Key index (customer_id) on orders | N/A | 2ms |
+
+
+### 4-  Write SQL Query to List products that have low stock quantities of less than 10 quantities.
+
+| Simple Query | Execution Time Before Optimization | Optimization Technique | Rewrite Query | Execution Time After Optimization |
+|--------------|----------------------------------|-----------------------|---------------|----------------------------------|
+| `SELECT product_id ,name, stock_quantity from  product where stock_quantity < 10` | 388.96ms | recovery index (stock_quantity,customer_id, name) on product| N/A | 17ms |
+
+
+### 5-  Write SQL Query to Calculate the revenue generated from each product category.
+
+| Simple Query | Execution Time Before Optimization | Optimization Technique | Rewrite Query | Execution Time After Optimization |
+|--------------|----------------------------------|-----------------------|---------------|----------------------------------|
+| `select p.category_id, cat.category_name,SUM(od.quantity * od.unit_price) as revenu from product p join category cat on  p.category_id = cat.category_id join order_details od on od.product_id = p.product_id GROUP by p.category_id, cat.category_name, revenu;` | 54.4s | MATERIALIZED view with index on category_id| N/A | 8ms |
+
+
+
+
+
+
+
 
 
 
